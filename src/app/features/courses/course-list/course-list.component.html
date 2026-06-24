@@ -1,39 +1,11 @@
-<div class="container">
+<h2>Courses</h2>
 
-    <h2>Courses</h2>
+<div *ngFor="let course of courses">
 
-    <div class="course-grid">
+  <h3>{{ course.courseName }}</h3>
 
-        <div class="card">
+  <p>{{ course.description }}</p>
 
-            <h3>Java Backend Development</h3>
-
-            <p>Spring Boot + Microservices</p>
-
-            <button>View Course</button>
-
-        </div>
-
-        <div class="card">
-
-            <h3>Kafka Masterclass</h3>
-
-            <p>Event Driven Architecture</p>
-
-            <button>View Course</button>
-
-        </div>
-
-        <div class="card">
-
-            <h3>System Design</h3>
-
-            <p>Scalable Systems</p>
-
-            <button>View Course</button>
-
-        </div>
-
-    </div>
+  <hr>
 
 </div>
