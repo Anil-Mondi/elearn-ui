@@ -13,6 +13,7 @@ export class CourseService {
   constructor(private http: HttpClient) {}
 
   getAllCourses() {
+    console.log('Calling API => ', this.baseUrl);
     return this.http.get(this.baseUrl);
   }
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CourseService } from '../../../core/services/course.service';
 
 @Component({
   selector: 'app-course-list',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })
@@ -17,6 +18,8 @@ export class CourseListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    console.log('Loading Courses...');
 
     this.courseService.getAllCourses()
       .subscribe({

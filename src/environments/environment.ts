@@ -1,6 +1,6 @@
 export const environment = {
 
   apiUrl:
-    'https://elearn-api-gateway.onrender.com'
+    'https://elearn-course-service.onrender.com'
 
 };
