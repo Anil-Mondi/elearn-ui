@@ -1,0 +1,53 @@
+@if(isLoading){
+
+<h2 style="text-align:center;margin-top:40px;">
+
+    Loading Profile...
+
+</h2>
+
+}
+
+@else{
+
+<div class="profile-container">
+
+    <div class="profile-card">
+
+        <h1>
+
+            My Profile
+
+        </h1>
+
+        <hr>
+
+        <p>
+
+            <strong>Name :</strong>
+
+            {{user.name}}
+
+        </p>
+
+        <p>
+
+            <strong>Email :</strong>
+
+            {{user.email}}
+
+        </p>
+
+        <p>
+
+            <strong>Contact Number :</strong>
+
+            {{user.contactNumber}}
+
+        </p>
+
+    </div>
+
+</div>
+
+}

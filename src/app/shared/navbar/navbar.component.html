@@ -1,31 +1,51 @@
-<nav class="navbar">
+<nav>
 
-    <div class="logo">
-        ELEARN
-    </div>
+    <a routerLink="/">Home</a>
 
-    <div class="menu">
+    |
 
-        <a routerLink="/">Home</a>
+    <a routerLink="/courses">Courses</a>
 
-        <a routerLink="/courses">Courses</a>
+    @if(tokenService.isLoggedIn()){
 
-        @if(!tokenService.isLoggedIn()){
+        |
 
-            <a routerLink="/login">Login</a>
+        <a routerLink="/profile">
 
-            <a routerLink="/register">Register</a>
+            Profile
 
-        }
+        </a>
 
-        @if(tokenService.isLoggedIn()){
+        |
 
-            <a (click)="logout()" style="cursor:pointer;">
-                Logout
-            </a>
+        <a
+            href="#"
+            (click)="logout(); $event.preventDefault()">
 
-        }
+            Logout
 
-    </div>
+        </a>
+
+    }
+
+    @else{
+
+        |
+
+        <a routerLink="/login">
+
+            Login
+
+        </a>
+
+        |
+
+        <a routerLink="/register">
+
+            Register
+
+        </a>
+
+    }
 
 </nav>
