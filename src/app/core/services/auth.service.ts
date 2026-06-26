@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { Observable } from 'rxjs';
+
 import { environment } from '../../../environments/environment';
 
 import { LoginRequest } from '../models/login-request';
 import { LoginResponse } from '../models/login-response';
-
-import { Observable } from 'rxjs';
+import { RegisterRequest } from '../models/register-request';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class AuthService {
 
   }
 
-  register(request: any) {
+  register(request: RegisterRequest): Observable<any> {
 
     return this.http.post(
       `${this.baseUrl}/register`,
