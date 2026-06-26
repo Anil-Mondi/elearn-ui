@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+
+import { TokenService } from '../../core/services/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,5 +11,18 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+
+  constructor(
+    public tokenService: TokenService,
+    private router: Router
+  ) {}
+
+  logout(): void {
+
+    this.tokenService.clear();
+
+    this.router.navigate(['/']);
+
+  }
 
 }

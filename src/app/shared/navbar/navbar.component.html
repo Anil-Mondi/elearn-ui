@@ -1,17 +1,31 @@
-<nav>
+<nav class="navbar">
 
-    <a routerLink="/">Home</a>
+    <div class="logo">
+        ELEARN
+    </div>
 
-    |
+    <div class="menu">
 
-    <a routerLink="/courses">Courses</a>
+        <a routerLink="/">Home</a>
 
-    |
+        <a routerLink="/courses">Courses</a>
 
-    <a routerLink="/login">Login</a>
+        @if(!tokenService.isLoggedIn()){
 
-    |
+            <a routerLink="/login">Login</a>
 
-    <a routerLink="/register">Register</a>
+            <a routerLink="/register">Register</a>
+
+        }
+
+        @if(tokenService.isLoggedIn()){
+
+            <a (click)="logout()" style="cursor:pointer;">
+                Logout
+            </a>
+
+        }
+
+    </div>
 
 </nav>

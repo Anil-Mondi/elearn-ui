@@ -11,6 +11,7 @@
     background: #1e293b;
 
     color: white;
+
 }
 
 .logo {
@@ -18,6 +19,7 @@
     font-size: 24px;
 
     font-weight: bold;
+
 }
 
 .menu {
@@ -25,6 +27,9 @@
     display: flex;
 
     gap: 25px;
+
+    align-items: center;
+
 }
 
 .menu a {
@@ -34,9 +39,13 @@
     text-decoration: none;
 
     font-weight: 500;
+
+    cursor: pointer;
+
 }
 
 .menu a:hover {
 
     color: #38bdf8;
+
 }
