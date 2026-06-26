@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { CourseService } from '../../../core/services/course.service';
+import { Course } from '../../../core/models/course';
 
 @Component({
   selector: 'app-course-list',
@@ -11,7 +13,9 @@ import { CourseService } from '../../../core/services/course.service';
 })
 export class CourseListComponent implements OnInit {
 
-  courses: any[] = [];
+  courses: Course[] = [];
+
+  isLoading = true;
 
   constructor(
     private courseService: CourseService
@@ -24,16 +28,21 @@ export class CourseListComponent implements OnInit {
     this.courseService.getAllCourses()
       .subscribe({
 
-        next: (response: any) => {
+        next: (response: Course[]) => {
 
           console.log('Courses:', response);
 
           this.courses = response;
+
+          this.isLoading = false;
+
         },
 
         error: (error) => {
 
           console.error('API Error:', error);
+
+          this.isLoading = false;
 
         }
 
