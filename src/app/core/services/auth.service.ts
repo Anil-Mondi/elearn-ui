@@ -1,28 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { environment } from '../../../environments/environment';
+
+import { LoginRequest } from '../models/login-request';
+import { LoginResponse } from '../models/login-response';
+
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  // environment defines apiUrl; use that instead of apiGatewayUrl
-  private baseUrl = `${environment.apiUrl}/users`;
+  private baseUrl = `${environment.userServiceUrl}/users`;
 
   constructor(private http: HttpClient) {}
 
-  login(request: any) {
-    return this.http.post(
+  login(request: LoginRequest): Observable<LoginResponse> {
+
+    return this.http.post<LoginResponse>(
       `${this.baseUrl}/login`,
       request
     );
+
   }
 
   register(request: any) {
+
     return this.http.post(
       `${this.baseUrl}/register`,
       request
     );
+
   }
+
 }
