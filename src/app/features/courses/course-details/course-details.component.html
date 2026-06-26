@@ -1,0 +1,75 @@
+@if(isLoading){
+
+<h2 style="text-align:center;margin-top:40px;">
+
+Loading Course...
+
+</h2>
+
+}
+
+@else{
+
+<div class="course-container">
+
+    <div class="course-card">
+
+        <h1>
+
+            {{course.courseName}}
+
+        </h1>
+
+        <p class="description">
+
+            {{course.description}}
+
+        </p>
+
+        <hr>
+
+        <p>
+
+            <strong>Category :</strong>
+
+            {{course.category}}
+
+        </p>
+
+        <p>
+
+            <strong>Price :</strong>
+
+            ₹{{course.price}}
+
+        </p>
+
+        <p>
+
+            <strong>Status :</strong>
+
+            {{course.status}}
+
+        </p>
+
+        <p>
+
+            <strong>Rating :</strong>
+
+            ⭐ {{course.avgRating}}
+
+            ({{course.reviewCount}} Reviews)
+
+        </p>
+
+        <button>
+
+            Enroll Now
+
+        </button>
+
+    </div>
+
+</div>
+
+}

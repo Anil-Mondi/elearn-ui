@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { CourseService } from '../../../core/services/course.service';
 import { Course } from '../../../core/models/course';
@@ -18,19 +19,22 @@ export class CourseListComponent implements OnInit {
   isLoading = true;
 
   constructor(
-    private courseService: CourseService
+    private courseService: CourseService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
 
-    console.log('Loading Courses...');
+    this.loadCourses();
+
+  }
+
+  loadCourses(): void {
 
     this.courseService.getAllCourses()
       .subscribe({
 
         next: (response: Course[]) => {
-
-          console.log('Courses:', response);
 
           this.courses = response;
 
@@ -40,13 +44,19 @@ export class CourseListComponent implements OnInit {
 
         error: (error) => {
 
-          console.error('API Error:', error);
+          console.error(error);
 
           this.isLoading = false;
 
         }
 
       });
+
+  }
+
+  viewCourse(courseId: number): void {
+
+    this.router.navigate(['/courses', courseId]);
 
   }
 

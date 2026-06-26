@@ -15,13 +15,19 @@ export class CourseService {
   private baseUrl =
     `${environment.courseServiceUrl}/courses`;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+  ) {}
 
   getAllCourses(): Observable<Course[]> {
 
-    console.log('Calling API => ', this.baseUrl);
-
     return this.http.get<Course[]>(this.baseUrl);
+
+  }
+
+  getCourseById(id: number): Observable<Course> {
+
+    return this.http.get<Course>(`${this.baseUrl}/${id}`);
 
   }
 

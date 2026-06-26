@@ -2,27 +2,36 @@
 
 @if(isLoading){
 
-    <h3 style="text-align:center;">
-        Loading Courses...
-    </h3>
+<h3 style="text-align:center;">
+
+    Loading Courses...
+
+</h3>
 
 }
 
 @else {
 
-    @for(course of courses; track course.id){
+    @for(course of courses; track course.courseId){
 
-        <div class="course-card">
+        <div
+            class="course-card"
+            (click)="viewCourse(course.courseId)"
+            style="cursor:pointer;">
 
-            <h2>{{ course.courseName }}</h2>
+            <h2>{{course.courseName}}</h2>
 
-            <p>{{ course.description }}</p>
+            <p>
+
+                {{course.description}}
+
+            </p>
 
             <p>
 
                 <strong>Category :</strong>
 
-                {{ course.category }}
+                {{course.category}}
 
             </p>
 
@@ -30,7 +39,15 @@
 
                 <strong>Price :</strong>
 
-                ₹{{ course.price }}
+                ₹{{course.price}}
+
+            </p>
+
+            <p>
+
+                ⭐ {{course.avgRating}}
+
+                ({{course.reviewCount}} Reviews)
 
             </p>
 
