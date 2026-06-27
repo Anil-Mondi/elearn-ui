@@ -1,0 +1,66 @@
+<h1>My Courses</h1>
+
+@if(isLoading){
+
+<h2 style="text-align:center;">
+
+Loading...
+
+</h2>
+
+}
+
+@else{
+
+    @if(courses.length===0){
+
+        <h2 style="text-align:center;">
+
+            No Purchased Courses
+
+        </h2>
+
+    }
+
+    @else{
+
+        @for(course of courses; track course.courseId){
+
+            <div
+                class="course-card"
+                (click)="openCourse(course.courseId)"
+                style="cursor:pointer;">
+
+                <h2>{{course.courseName}}</h2>
+
+                <p>{{course.description}}</p>
+
+                <p>
+
+                    <strong>Category :</strong>
+
+                    {{course.category}}
+
+                </p>
+
+                <p>
+
+                    ₹{{course.price}}
+
+                </p>
+
+                <p>
+
+                    ⭐ {{course.avgRating}}
+
+                    ({{course.reviewCount}} Reviews)
+
+                </p>
+
+            </div>
+
+        }
+
+    }
+
+}

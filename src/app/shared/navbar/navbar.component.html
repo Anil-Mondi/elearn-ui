@@ -4,9 +4,21 @@
 
     |
 
-    <a routerLink="/courses">Courses</a>
+    <a routerLink="/courses">
+
+        Courses
+
+    </a>
 
     @if(tokenService.isLoggedIn()){
+
+        |
+
+        <a routerLink="/my-courses">
+
+            My Courses
+
+        </a>
 
         |
 

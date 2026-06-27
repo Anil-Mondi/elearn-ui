@@ -2,7 +2,7 @@
 
 <h2 style="text-align:center;margin-top:40px;">
 
-Loading Course...
+    Loading Course...
 
 </h2>
 
@@ -62,11 +62,117 @@ Loading Course...
 
         </p>
 
-        <button>
+        <button (click)="enrollCourse()">
 
             Enroll Now
 
         </button>
+
+        <hr style="margin:30px 0;">
+
+        <h2>
+
+            Write a Review
+
+        </h2>
+
+        <p>
+
+            Rating
+
+        </p>
+
+        <select [(ngModel)]="rating">
+
+            <option [value]="5">★★★★★ (5)</option>
+
+            <option [value]="4">★★★★☆ (4)</option>
+
+            <option [value]="3">★★★☆☆ (3)</option>
+
+            <option [value]="2">★★☆☆☆ (2)</option>
+
+            <option [value]="1">★☆☆☆☆ (1)</option>
+
+        </select>
+
+        <br><br>
+
+        <textarea
+
+            rows="5"
+
+            style="width:100%;"
+
+            placeholder="Write your review..."
+
+            [(ngModel)]="reviewText">
+
+        </textarea>
+
+        <br><br>
+
+        <button (click)="submitReview()">
+
+            Submit Review
+
+        </button>
+
+        <hr style="margin:40px 0;">
+
+        <h2>
+
+            Reviews
+
+        </h2>
+
+        @if(reviews.length===0){
+
+            <p>
+
+                No Reviews Yet
+
+            </p>
+
+        }
+
+        @else{
+
+            @for(review of reviews; track review.reviewId){
+
+                <div
+                    style="border:1px solid #ddd;
+                           padding:15px;
+                           margin-top:15px;
+                           border-radius:8px;">
+
+                    <p>
+
+                        <strong>
+
+                            ⭐ {{review.rating}} / 5
+
+                        </strong>
+
+                    </p>
+
+                    <p>
+
+                        {{review.reviewText}}
+
+                    </p>
+
+                    <small>
+
+                        {{review.createdAt}}
+
+                    </small>
+
+                </div>
+
+            }
+
+        }
 
     </div>
 

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { TokenService } from '../../../core/services/token.service';
+import { JwtService } from '../../../core/services/jwt.service';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,19 +17,25 @@ import { TokenService } from '../../../core/services/token.service';
 export class LoginComponent {
 
   email = '';
+
   password = '';
 
   constructor(
     private authService: AuthService,
     private tokenService: TokenService,
+    private jwtService: JwtService,
+    private userService: UserService,
     private router: Router
   ) {}
 
   login(): void {
 
     const request = {
+
       email: this.email,
+
       password: this.password
+
     };
 
     this.authService.login(request)
@@ -35,12 +43,24 @@ export class LoginComponent {
 
         next: (response) => {
 
-          console.log('Login Success', response);
-
           this.tokenService.saveToken(response.token);
+
           this.tokenService.saveRole(response.role);
 
-          this.router.navigate(['/']);
+          const email =
+            this.jwtService.getEmail();
+
+          this.userService
+            .getUserByEmail(email)
+            .subscribe({
+
+              next: () => {
+
+                this.router.navigate(['/']);
+
+              }
+
+            });
 
         },
 

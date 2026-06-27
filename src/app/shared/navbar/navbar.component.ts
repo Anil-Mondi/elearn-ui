@@ -21,7 +21,9 @@ export class NavbarComponent {
 
     this.tokenService.clear();
 
-    this.router.navigate(['/']);
+    localStorage.removeItem('current_user');
+
+    this.router.navigate(['/login']);
 
   }
 
