@@ -62,67 +62,79 @@
 
         </p>
 
-        <button (click)="enrollCourse()">
+        <!-- Only for users who have NOT purchased -->
 
-            Enroll Now
+        @if(!ownedCourse){
 
-        </button>
+            <button (click)="enrollCourse()">
 
-        <hr style="margin:30px 0;">
+                Enroll Now
 
-        <h2>
+            </button>
 
-            Write a Review
+        }
 
-        </h2>
+        <!-- Only for purchased courses -->
 
-        <p>
+        @if(ownedCourse){
 
-            Rating
+            <hr style="margin:30px 0;">
 
-        </p>
+            <h2>
 
-        <select [(ngModel)]="rating">
+                Write a Review
 
-            <option [value]="5">★★★★★ (5)</option>
+            </h2>
 
-            <option [value]="4">★★★★☆ (4)</option>
+            <p>
 
-            <option [value]="3">★★★☆☆ (3)</option>
+                Rating
 
-            <option [value]="2">★★☆☆☆ (2)</option>
+            </p>
 
-            <option [value]="1">★☆☆☆☆ (1)</option>
+            <select [(ngModel)]="rating">
 
-        </select>
+                <option [value]="5">★★★★★ (5)</option>
 
-        <br><br>
+                <option [value]="4">★★★★☆ (4)</option>
 
-        <textarea
+                <option [value]="3">★★★☆☆ (3)</option>
 
-            rows="5"
+                <option [value]="2">★★☆☆☆ (2)</option>
 
-            style="width:100%;"
+                <option [value]="1">★☆☆☆☆ (1)</option>
 
-            placeholder="Write your review..."
+            </select>
 
-            [(ngModel)]="reviewText">
+            <br><br>
 
-        </textarea>
+            <textarea
 
-        <br><br>
+                rows="5"
 
-        <button (click)="submitReview()">
+                style="width:100%;"
 
-            Submit Review
+                placeholder="Write your review..."
 
-        </button>
+                [(ngModel)]="reviewText">
+
+            </textarea>
+
+            <br><br>
+
+            <button (click)="submitReview()">
+
+                Submit Review
+
+            </button>
+
+        }
 
         <hr style="margin:40px 0;">
 
         <h2>
 
-            Reviews
+            Student Reviews
 
         </h2>
 
@@ -141,10 +153,12 @@
             @for(review of reviews; track review.reviewId){
 
                 <div
-                    style="border:1px solid #ddd;
-                           padding:15px;
-                           margin-top:15px;
-                           border-radius:8px;">
+                    style="
+                    border:1px solid #ddd;
+                    padding:15px;
+                    margin-top:15px;
+                    border-radius:10px;
+                    background:#fafafa;">
 
                     <p>
 

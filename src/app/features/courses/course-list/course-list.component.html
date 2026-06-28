@@ -1,58 +1,89 @@
-<h1>Available Courses</h1>
+<div class="page-header">
+
+    <h1>
+
+        Explore Our Courses
+
+    </h1>
+
+    <p>
+
+        Learn industry-ready skills with production-quality courses.
+
+    </p>
+
+</div>
 
 @if(isLoading){
 
-<h3 style="text-align:center;">
+<div class="loading">
 
     Loading Courses...
 
-</h3>
+</div>
 
 }
 
-@else {
+@else{
+
+<div class="course-grid">
 
     @for(course of courses; track course.courseId){
 
-        <div
-            class="course-card"
-            (click)="viewCourse(course.courseId)"
-            style="cursor:pointer;">
+    <div
+        class="course-card"
+        (click)="viewCourse(course.courseId)">
 
-            <h2>{{course.courseName}}</h2>
+        <div class="course-top">
 
-            <p>
-
-                {{course.description}}
-
-            </p>
-
-            <p>
-
-                <strong>Category :</strong>
+            <span class="badge">
 
                 {{course.category}}
 
-            </p>
-
-            <p>
-
-                <strong>Price :</strong>
-
-                ₹{{course.price}}
-
-            </p>
-
-            <p>
-
-                ⭐ {{course.avgRating}}
-
-                ({{course.reviewCount}} Reviews)
-
-            </p>
+            </span>
 
         </div>
 
+        <h2>
+
+            {{course.courseName}}
+
+        </h2>
+
+        <p class="description">
+
+            {{course.description}}
+
+        </p>
+
+        <div class="rating">
+
+            ⭐ {{course.avgRating}}
+
+            <span>
+
+                ({{course.reviewCount}} Reviews)
+
+            </span>
+
+        </div>
+
+        <div class="price">
+
+            ₹{{course.price}}
+
+        </div>
+
+        <button>
+
+            View Course →
+
+        </button>
+
+    </div>
+
     }
+
+</div>
 
 }

@@ -31,6 +31,8 @@ export class CourseDetailsComponent implements OnInit {
 
   course!: Course;
 
+  ownedCourse = false;
+
   isLoading = true;
 
   constructor(
@@ -42,27 +44,41 @@ export class CourseDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.courseService.getCourseById(id).subscribe({
-      next: (response: Course) => {
-        this.course = response;
+    this.ownedCourse =
+      this.route.snapshot.queryParamMap.get('owned') === 'true';
 
-        this.isLoading = false;
+    const id = Number(
+      this.route.snapshot.paramMap.get('id')
+    );
 
-        this.loadReviews();
-      },
+    this.courseService
+      .getCourseById(id)
+      .subscribe({
 
-      error: (error) => {
-        console.error(error);
+        next: (response: Course) => {
 
-        this.isLoading = false;
+          this.course = response;
 
-        this.loadReviews();
-      },
-    });
+          this.isLoading = false;
+
+          this.loadReviews();
+
+        },
+
+        error: (error) => {
+
+          console.error(error);
+
+          this.isLoading = false;
+
+        }
+
+      });
+
   }
 
+ 
   enrollCourse(): void {
     console.log('Enroll clicked');
 

@@ -94,7 +94,21 @@ export class MyCoursesComponent implements OnInit {
 
   openCourse(courseId: number): void {
 
-    this.router.navigate(['/courses', courseId]);
+    this.router.navigate(
+
+      ['/courses', courseId],
+
+      {
+
+        queryParams: {
+
+          owned: true
+
+        }
+
+      }
+
+    );
 
   }
 

@@ -1,12 +1,26 @@
-<h1>My Courses</h1>
+<div class="page-header">
+
+    <h1>
+
+        My Learning Dashboard
+
+    </h1>
+
+    <p>
+
+        Continue learning from your purchased courses.
+
+    </p>
+
+</div>
 
 @if(isLoading){
 
-<h2 style="text-align:center;">
+<div class="loading">
 
-Loading...
+    Loading your courses...
 
-</h2>
+</div>
 
 }
 
@@ -14,38 +28,61 @@ Loading...
 
     @if(courses.length===0){
 
-        <h2 style="text-align:center;">
+    <div class="empty-card">
 
-            No Purchased Courses
+        <h2>
+
+            📚 No Purchased Courses
 
         </h2>
+
+        <p>
+
+            Purchase a course and start your learning journey.
+
+        </p>
+
+    </div>
 
     }
 
     @else{
 
+    <div class="course-grid">
+
         @for(course of courses; track course.courseId){
 
-            <div
-                class="course-card"
-                (click)="openCourse(course.courseId)"
-                style="cursor:pointer;">
+        <div
+            class="course-card"
+            (click)="openCourse(course.courseId)">
 
-                <h2>{{course.courseName}}</h2>
+            <div class="course-header">
 
-                <p>{{course.description}}</p>
+                <span class="badge">
+
+                    Purchased
+
+                </span>
+
+            </div>
+
+            <h2>
+
+                {{course.courseName}}
+
+            </h2>
+
+            <p class="description">
+
+                {{course.description}}
+
+            </p>
+
+            <div class="course-info">
 
                 <p>
 
-                    <strong>Category :</strong>
-
-                    {{course.category}}
-
-                </p>
-
-                <p>
-
-                    ₹{{course.price}}
+                    📂 {{course.category}}
 
                 </p>
 
@@ -53,13 +90,29 @@ Loading...
 
                     ⭐ {{course.avgRating}}
 
-                    ({{course.reviewCount}} Reviews)
+                    ({{course.reviewCount}})
 
                 </p>
 
             </div>
 
+            <div class="price">
+
+                ₹{{course.price}}
+
+            </div>
+
+            <button>
+
+                Continue Learning →
+
+            </button>
+
+        </div>
+
         }
+
+    </div>
 
     }
 
