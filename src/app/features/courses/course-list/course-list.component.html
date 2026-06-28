@@ -1,14 +1,10 @@
 <div class="page-header">
 
-    <h1>
-
-        Explore Courses
-
-    </h1>
+    <h1>Explore Courses</h1>
 
     <p>
 
-        Learn from production-ready backend engineering courses.
+        Learn Production Ready Backend Development
 
     </p>
 
@@ -22,7 +18,7 @@
 
         placeholder="Search courses..."
 
-        [(ngModel)]="searchText"
+        [(ngModel)]="search"
 
         (input)="applyFilters()">
 
@@ -54,31 +50,25 @@
 
     <select
 
-        [(ngModel)]="selectedSort"
+        [(ngModel)]="sortBy"
 
         (change)="applyFilters()">
 
-        <option value="DEFAULT">
+        <option value="rating">
 
-            Sort
-
-        </option>
-
-        <option value="PRICE_LOW">
-
-            Price ↑
+            Highest Rated
 
         </option>
 
-        <option value="PRICE_HIGH">
+        <option value="priceLow">
 
-            Price ↓
+            Price Low
 
         </option>
 
-        <option value="RATING">
+        <option value="priceHigh">
 
-            Rating
+            Price High
 
         </option>
 
@@ -86,13 +76,19 @@
 
 </div>
 
+<p class="course-count">
+
+    {{filteredCourses.length}} Courses Found
+
+</p>
+
 @if(isLoading){
 
-<h2 class="loading">
+<div class="loading">
 
-    Loading Courses...
+Loading Courses...
 
-</h2>
+</div>
 
 }
 
@@ -108,11 +104,11 @@ class="course-card"
 
 (click)="viewCourse(course.courseId)">
 
-<div class="badge">
+<span class="badge">
 
 {{course.category}}
 
-</div>
+</span>
 
 <h2>
 
@@ -126,31 +122,25 @@ class="course-card"
 
 </p>
 
-<div class="details">
+<div class="bottom">
 
-<span>
+<div>
 
 ⭐ {{course.avgRating}}
 
-</span>
-
-<span>
-
-{{course.reviewCount}} Reviews
-
-</span>
-
 </div>
 
-<div class="price">
+<div>
 
 ₹{{course.price}}
 
 </div>
 
+</div>
+
 <button>
 
-View Course →
+View Details →
 
 </button>
 

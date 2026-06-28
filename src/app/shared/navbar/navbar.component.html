@@ -1,21 +1,39 @@
 <nav class="navbar">
 
-    <div class="logo"
-         routerLink="/">
+    <div
+        class="logo"
+        routerLink="/"
+        (click)="closeMenu()">
 
         E-Learn
 
     </div>
 
-    <div class="menu">
+    <button
+        class="menu-btn"
+        (click)="toggleMenu()">
 
-        <a routerLink="/">
+        ☰
+
+    </button>
+
+    <div
+        class="menu"
+        [class.open]="mobileMenuOpen">
+
+        <a
+            routerLink="/"
+            routerLinkActive="active"
+            (click)="closeMenu()">
 
             Home
 
         </a>
 
-        <a routerLink="/courses">
+        <a
+            routerLink="/courses"
+            routerLinkActive="active"
+            (click)="closeMenu()">
 
             Courses
 
@@ -23,37 +41,56 @@
 
         @if(tokenService.isLoggedIn()){
 
-            <a routerLink="/my-courses">
+            <a
+                routerLink="/my-courses"
+                routerLinkActive="active"
+                (click)="closeMenu()">
 
                 My Courses
 
             </a>
 
-            <a routerLink="/profile">
+            <a
+                routerLink="/profile"
+                routerLinkActive="active"
+                (click)="closeMenu()">
 
                 Profile
 
             </a>
 
-            <a
-                href="#"
-                (click)="logout();$event.preventDefault()">
+            <div class="avatar">
+
+                {{getInitial()}}
+
+            </div>
+
+            <button
+                class="logout"
+
+                (click)="logout()">
 
                 Logout
 
-            </a>
+            </button>
 
         }
 
         @else{
 
-            <a routerLink="/login">
+            <a
+                routerLink="/login"
+                routerLinkActive="active"
+                (click)="closeMenu()">
 
                 Login
 
             </a>
 
-            <a routerLink="/register">
+            <a
+                routerLink="/register"
+                routerLinkActive="active"
+                (click)="closeMenu()">
 
                 Register
 

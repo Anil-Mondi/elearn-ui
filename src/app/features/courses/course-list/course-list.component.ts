@@ -22,13 +22,13 @@ export class CourseListComponent implements OnInit {
 
   filteredCourses: Course[] = [];
 
-  isLoading = true;
-
-  searchText = '';
+  search = '';
 
   selectedCategory = 'ALL';
 
-  selectedSort = 'DEFAULT';
+  sortBy = 'rating';
+
+  isLoading = true;
 
   constructor(
     private courseService: CourseService,
@@ -43,24 +43,25 @@ export class CourseListComponent implements OnInit {
 
   loadCourses(): void {
 
-    this.courseService.getAllCourses()
+    this.courseService
+      .getAllCourses()
       .subscribe({
 
-        next: (response: Course[]) => {
+        next:(courses)=>{
 
-          this.courses = response;
+          this.courses = courses;
 
-          this.filteredCourses = [...response];
+          this.applyFilters();
 
-          this.isLoading = false;
+          this.isLoading=false;
 
         },
 
-        error: (error) => {
+        error:(error)=>{
 
           console.error(error);
 
-          this.isLoading = false;
+          this.isLoading=false;
 
         }
 
@@ -70,46 +71,55 @@ export class CourseListComponent implements OnInit {
 
   applyFilters(): void {
 
-    this.filteredCourses = this.courses.filter(course => {
+    this.filteredCourses = [...this.courses];
 
-      const matchesSearch =
-        course.courseName
+    if(this.search.trim()){
+
+      this.filteredCourses =
+      this.filteredCourses.filter(c=>
+
+        c.courseName
           .toLowerCase()
-          .includes(this.searchText.toLowerCase());
+          .includes(this.search.toLowerCase())
 
-      const matchesCategory =
-        this.selectedCategory === 'ALL'
-        || course.category === this.selectedCategory;
+      );
 
-      return matchesSearch && matchesCategory;
+    }
 
-    });
+    if(this.selectedCategory!=='ALL'){
 
-    switch(this.selectedSort){
+      this.filteredCourses =
+      this.filteredCourses.filter(c=>
 
-      case 'PRICE_LOW':
+        c.category===this.selectedCategory
+
+      );
+
+    }
+
+    switch(this.sortBy){
+
+      case 'priceLow':
 
         this.filteredCourses.sort((a,b)=>a.price-b.price);
 
         break;
 
-      case 'PRICE_HIGH':
+      case 'priceHigh':
 
         this.filteredCourses.sort((a,b)=>b.price-a.price);
 
         break;
 
-      case 'RATING':
+      default:
 
         this.filteredCourses.sort((a,b)=>b.avgRating-a.avgRating);
-
-        break;
 
     }
 
   }
 
-  viewCourse(courseId:number):void{
+  viewCourse(courseId:number){
 
     this.router.navigate(['/courses',courseId]);
 

@@ -6,6 +6,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { TokenService } from '../../../core/services/token.service';
 import { JwtService } from '../../../core/services/jwt.service';
 import { UserService } from '../../../core/services/user.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent {
     private tokenService: TokenService,
     private jwtService: JwtService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   login(): void {
@@ -54,23 +56,25 @@ export class LoginComponent {
             .getUserByEmail(email)
             .subscribe({
 
-              next: () => {
+              next:()=>{
+
+                this.toastService.showSuccess('Welcome Back!');
 
                 this.router.navigate(['/']);
 
-              }
+            }
 
             });
 
         },
 
-        error: (error) => {
+        error:(error)=>{
 
           console.error(error);
 
-          alert('Invalid Email or Password');
+          this.toastService.showError('Invalid Email or Password');
 
-        }
+      }
 
       });
 

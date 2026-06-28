@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { RegisterRequest } from '../../../core/models/register-request';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,8 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   register(): void {
@@ -41,31 +43,39 @@ export class RegisterComponent {
     this.authService.register(this.request)
       .subscribe({
 
-        next: () => {
+        next:()=>{
 
-          alert('Registration Successful');
+            this.toastService.showSuccess(
+              'Registration Successful'
+            );
 
-          this.router.navigate(['/login']);
+            this.router.navigate(['/login']);
 
         },
 
-        error: (error) => {
+        error:(error)=>{
 
-          console.error(error);
+            console.error(error);
 
-          if (error.status === 409) {
+            if(error.status===409){
 
-            alert(error.error);
+                this.toastService.showError(
+                  error.error
+                );
 
-          } else {
+            }
 
-            alert('Registration Failed');
+            else{
 
-          }
+                this.toastService.showError(
+                  'Registration Failed'
+                );
+
+            }
 
         }
 
-      });
+    });
 
   }
 
