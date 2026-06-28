@@ -53,7 +53,15 @@ export class RegisterComponent {
 
           console.error(error);
 
-          alert('Registration Failed');
+          if (error.status === 409) {
+
+            alert(error.error);
+
+          } else {
+
+            alert('Registration Failed');
+
+          }
 
         }
 
