@@ -2,25 +2,97 @@
 
     <h1>
 
-        Explore Our Courses
+        Explore Courses
 
     </h1>
 
     <p>
 
-        Learn industry-ready skills with production-quality courses.
+        Learn from production-ready backend engineering courses.
 
     </p>
 
 </div>
 
+<div class="toolbar">
+
+    <input
+
+        type="text"
+
+        placeholder="Search courses..."
+
+        [(ngModel)]="searchText"
+
+        (input)="applyFilters()">
+
+    <select
+
+        [(ngModel)]="selectedCategory"
+
+        (change)="applyFilters()">
+
+        <option value="ALL">
+
+            All Categories
+
+        </option>
+
+        <option value="SELF_LEARNING">
+
+            Self Learning
+
+        </option>
+
+        <option value="INSTRUCTOR_LED">
+
+            Instructor Led
+
+        </option>
+
+    </select>
+
+    <select
+
+        [(ngModel)]="selectedSort"
+
+        (change)="applyFilters()">
+
+        <option value="DEFAULT">
+
+            Sort
+
+        </option>
+
+        <option value="PRICE_LOW">
+
+            Price ↑
+
+        </option>
+
+        <option value="PRICE_HIGH">
+
+            Price ↓
+
+        </option>
+
+        <option value="RATING">
+
+            Rating
+
+        </option>
+
+    </select>
+
+</div>
+
 @if(isLoading){
 
-<div class="loading">
+<h2 class="loading">
 
     Loading Courses...
 
-</div>
+</h2>
 
 }
 
@@ -28,61 +100,63 @@
 
 <div class="course-grid">
 
-    @for(course of courses; track course.courseId){
+@for(course of filteredCourses;track course.courseId){
 
-    <div
-        class="course-card"
-        (click)="viewCourse(course.courseId)">
+<div
 
-        <div class="course-top">
+class="course-card"
 
-            <span class="badge">
+(click)="viewCourse(course.courseId)">
 
-                {{course.category}}
+<div class="badge">
 
-            </span>
+{{course.category}}
 
-        </div>
+</div>
 
-        <h2>
+<h2>
 
-            {{course.courseName}}
+{{course.courseName}}
 
-        </h2>
+</h2>
 
-        <p class="description">
+<p>
 
-            {{course.description}}
+{{course.description}}
 
-        </p>
+</p>
 
-        <div class="rating">
+<div class="details">
 
-            ⭐ {{course.avgRating}}
+<span>
 
-            <span>
+⭐ {{course.avgRating}}
 
-                ({{course.reviewCount}} Reviews)
+</span>
 
-            </span>
+<span>
 
-        </div>
+{{course.reviewCount}} Reviews
 
-        <div class="price">
+</span>
 
-            ₹{{course.price}}
+</div>
 
-        </div>
+<div class="price">
 
-        <button>
+₹{{course.price}}
 
-            View Course →
+</div>
 
-        </button>
+<button>
 
-    </div>
+View Course →
 
-    }
+</button>
+
+</div>
+
+}
 
 </div>
 

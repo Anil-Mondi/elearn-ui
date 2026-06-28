@@ -1,0 +1,75 @@
+.toast{
+
+    position:fixed;
+
+    top:25px;
+
+    right:25px;
+
+    width:330px;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    font-size:16px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+    z-index:9999;
+
+    animation:slideIn .4s ease;
+
+}
+
+.success{
+
+    background:#16a34a;
+
+}
+
+.error{
+
+    background:#dc2626;
+
+}
+
+.icon{
+
+    font-size:28px;
+
+}
+
+.message{
+
+    flex:1;
+
+}
+
+@keyframes slideIn{
+
+from{
+
+    opacity:0;
+
+    transform:translateX(120%);
+
+}
+
+to{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+}

@@ -1,22 +1,48 @@
 <div class="login-container">
 
-    <h2>Login</h2>
+    <div class="login-card">
 
-    <input
-        type="email"
-        placeholder="Email"
-        [(ngModel)]="email">
+        <h2>
 
-    <input
-        type="password"
-        placeholder="Password"
-        [(ngModel)]="password">
+            Welcome Back 👋
 
-    <button
-        (click)="login()">
+        </h2>
 
-        Login
+        <p class="subtitle">
 
-    </button>
+            Login to continue your learning journey.
+
+        </p>
+
+        <input
+            type="email"
+            placeholder="Enter your email"
+            [(ngModel)]="email">
+
+        <input
+            type="password"
+            placeholder="Enter your password"
+            [(ngModel)]="password">
+
+        <button
+            (click)="login()">
+
+            Login
+
+        </button>
+
+        <p class="register-link">
+
+            Don't have an account?
+
+            <a routerLink="/register">
+
+                Register
+
+            </a>
+
+        </p>
+
+    </div>
 
 </div>

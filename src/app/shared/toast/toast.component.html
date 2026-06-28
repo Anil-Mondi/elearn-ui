@@ -1,0 +1,34 @@
+@if(toastService.visible){
+
+<div
+class="toast"
+
+[class.success]="toastService.type==='success'"
+
+[class.error]="toastService.type==='error'">
+
+    <div class="icon">
+
+        @if(toastService.type==='success'){
+
+            ✅
+
+        }
+
+        @else{
+
+            ❌
+
+        }
+
+    </div>
+
+    <div class="message">
+
+        {{toastService.message}}
+
+    </div>
+
+</div>
+
+}
