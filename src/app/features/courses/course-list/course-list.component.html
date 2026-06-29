@@ -1,153 +1,219 @@
-<div class="page-header">
+<section class="course-page">
 
-    <h1>Explore Courses</h1>
+    <!-- ================= Header ================= -->
 
-    <p>
+    <div class="page-header">
 
-        Learn Production Ready Backend Development
+        <span class="page-tag">
+            🚀 Production Ready Courses
+        </span>
 
-    </p>
+        <h1>
+            Explore Courses
+        </h1>
 
-</div>
+        <p>
+            Learn Java, Spring Boot, Kafka, Microservices, Redis,
+            Docker and System Design with production-ready projects.
+        </p>
 
-<div class="toolbar">
+    </div>
 
-    <input
+    <!-- ================= Toolbar ================= -->
 
-        type="text"
+    <div class="toolbar">
 
-        placeholder="Search courses..."
+        <div class="search-box">
 
-        [(ngModel)]="search"
+            <span class="search-icon">
+                🔍
+            </span>
 
-        (input)="applyFilters()">
+            <input
+                type="text"
+                placeholder="Search Java, Spring Boot, Kafka..."
+                [(ngModel)]="search"
+                (input)="applyFilters()">
 
-    <select
+        </div>
 
-        [(ngModel)]="selectedCategory"
+        <select
+            [(ngModel)]="selectedCategory"
+            (change)="applyFilters()">
 
-        (change)="applyFilters()">
+            <option value="ALL">
+                All Categories
+            </option>
 
-        <option value="ALL">
+            <option value="SELF_LEARNING">
+                Self Learning
+            </option>
 
-            All Categories
+            <option value="INSTRUCTOR_LED">
+                Instructor Led
+            </option>
 
-        </option>
+        </select>
 
-        <option value="SELF_LEARNING">
+        <select
+            [(ngModel)]="sortBy"
+            (change)="applyFilters()">
 
-            Self Learning
+            <option value="rating">
+                Highest Rated
+            </option>
 
-        </option>
+            <option value="priceLow">
+                Price Low
+            </option>
 
-        <option value="INSTRUCTOR_LED">
+            <option value="priceHigh">
+                Price High
+            </option>
 
-            Instructor Led
+        </select>
 
-        </option>
+    </div>
 
-    </select>
+    <!-- ================= Count ================= -->
 
-    <select
+    <div class="course-info">
 
-        [(ngModel)]="sortBy"
+        <p>
 
-        (change)="applyFilters()">
+            📚 {{filteredCourses.length}}
 
-        <option value="rating">
+            Courses Available
 
-            Highest Rated
+        </p>
 
-        </option>
+    </div>
 
-        <option value="priceLow">
+    <!-- ================= Loading ================= -->
 
-            Price Low
+    @if(isLoading){
 
-        </option>
+    <div class="loading">
 
-        <option value="priceHigh">
+        <div class="loader"></div>
 
-            Price High
+        <p>
 
-        </option>
+            Loading Courses...
 
-    </select>
+        </p>
 
-</div>
+    </div>
 
-<p class="course-count">
+    }
 
-    {{filteredCourses.length}} Courses Found
+    @else {
 
-</p>
+    <!-- ================= Empty ================= -->
 
-@if(isLoading){
+    @if(filteredCourses.length===0){
 
-<div class="loading">
+    <div class="empty-state">
 
-Loading Courses...
+        <div class="empty-icon">
 
-</div>
+            📚
 
-}
+        </div>
 
-@else{
+        <h2>
 
-<div class="course-grid">
+            No Courses Found
 
-@for(course of filteredCourses;track course.courseId){
+        </h2>
 
-<div
+        <p>
 
-class="course-card"
+            Try another search or category.
 
-(click)="viewCourse(course.courseId)">
+        </p>
 
-<span class="badge">
+    </div>
 
-{{course.category}}
+    }
 
-</span>
+    @else{
 
-<h2>
+    <!-- ================= Cards ================= -->
 
-{{course.courseName}}
+    <div class="course-grid">
 
-</h2>
+        @for(course of filteredCourses;track course.courseId){
 
-<p>
+        <div
+            class="course-card"
+            (click)="viewCourse(course.courseId)">
 
-{{course.description}}
+            <div class="top-row">
 
-</p>
+                <span class="badge">
 
-<div class="bottom">
+                    {{course.category}}
 
-<div>
+                </span>
 
-⭐ {{course.avgRating}}
+                <span class="lifetime">
 
-</div>
+                    Lifetime Access
 
-<div>
+                </span>
 
-₹{{course.price}}
+            </div>
 
-</div>
+            <h2>
 
-</div>
+                {{course.courseName}}
 
-<button>
+            </h2>
 
-View Details →
+            <p class="description">
 
-</button>
+                {{course.description}}
 
-</div>
+            </p>
 
-}
+            <div class="course-meta">
 
-</div>
+                <div class="rating">
 
-}
+                    ⭐ {{course.avgRating}}
+
+                    <span>
+
+                        ({{course.reviewCount}} Reviews)
+
+                    </span>
+
+                </div>
+
+                <div class="price">
+
+                    ₹{{course.price}}
+
+                </div>
+
+            </div>
+
+            <button
+                class="view-btn">
+
+                View Details →
+
+            </button>
+
+        </div>
+
+        }
+
+    </div>
+
+    }
+
+    }
+
+</section>
